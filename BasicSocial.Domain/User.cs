@@ -12,11 +12,7 @@ namespace BasicSocial.Domain
 		public string Age { get; set; }
 		public IList<User> Friends { get; set; }
 		public IList<Post> Posts { get; set; }
-    }
-
-	public class Post
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
+		public IList<PrivateMessage> PrivateMessagesReceived { get; set; }
+	    public IList<PrivateMessage> PrivateMessagesSent { get; set; }
 	}
 }
