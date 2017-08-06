@@ -64,8 +64,6 @@ namespace BasicSocial.Dal.Tests
 			}
 		}
 
-
-
 		[TestMethod]
 		public void TestUser3Friends()
 		{

@@ -10,7 +10,13 @@ namespace BasicSocial.Dal
 {
     public class GeneralContext : DbContext
     {
-		public DbSet<User> Users { get; set; }
+	    public GeneralContext() : base(
+		    "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BasicSocial.Dal.GeneralContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+	    {
+
+	    }
+
+	    public DbSet<User> Users { get; set; }
 		public DbSet<ImagePost> ImagePosts { get; set; } 
 		public DbSet<TextPost> TextPosts { get; set; }
 		public DbSet<PrivateMessage> PrivateMessages { get; set; }
