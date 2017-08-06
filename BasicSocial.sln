@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSocial.Core", "BasicSo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSocial.Dal.Tests", "BasicSocial.Dal.Tests\BasicSocial.Dal.Tests.csproj", "{96023754-C4EB-44C7-8E43-72F866087968}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSocial.Web", "BasicSocial.Web\BasicSocial.Web.csproj", "{87769FA5-B76B-449C-99FE-07AB456F6986}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{96023754-C4EB-44C7-8E43-72F866087968}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96023754-C4EB-44C7-8E43-72F866087968}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96023754-C4EB-44C7-8E43-72F866087968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87769FA5-B76B-449C-99FE-07AB456F6986}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87769FA5-B76B-449C-99FE-07AB456F6986}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87769FA5-B76B-449C-99FE-07AB456F6986}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87769FA5-B76B-449C-99FE-07AB456F6986}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
