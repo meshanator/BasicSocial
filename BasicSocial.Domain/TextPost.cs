@@ -1,6 +1,6 @@
 ﻿namespace BasicSocial.Domain
 {
-	public class Text : Post
+	public class TextPost : Post
 	{
 		public string Content { get; set; }
 	}
