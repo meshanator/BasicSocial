@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BasicSocial.Dal.Tests
 {
 	[TestClass]
-	public class UnitTest1
+	public class BasicDalTests
 	{
 		[TestMethod]
 		public void TestMethod1()

@@ -278,6 +278,10 @@
       <Project>{f95a77cb-dd99-4943-b2a3-2663338a0438}</Project>
       <Name>BasicSocial.BasicIdentity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BasicSocial.Core\BasicSocial.Core.csproj">
+      <Project>{4F4E217F-91AF-4074-97FD-A9A48F456921}</Project>
+      <Name>BasicSocial.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BasicSocial.Dal\BasicSocial.Dal.csproj">
       <Project>{3EF5847C-F9E5-4D05-8530-43F4E8F0BC17}</Project>
       <Name>BasicSocial.Dal</Name>
