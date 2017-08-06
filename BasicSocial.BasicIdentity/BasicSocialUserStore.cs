@@ -7,7 +7,10 @@ using Microsoft.AspNet.Identity;
 
 namespace BasicSocial.BasicIdentity
 {
-	public class BasicSocialUserStore : IUserPasswordStore<BasicSocialUser, int>, IUserLockoutStore<BasicSocialUser, int>, IUserTwoFactorStore<BasicSocialUser, int>
+	public class BasicSocialUserStore :
+		IUserPasswordStore<BasicSocialUser, int>,
+		IUserLockoutStore<BasicSocialUser, int>,
+		IUserTwoFactorStore<BasicSocialUser, int>
 	{
 		public GeneralContext Context { get; set; }
 
@@ -18,7 +21,7 @@ namespace BasicSocial.BasicIdentity
 
 		public void Dispose()
 		{
-			//Context.Dispose();
+			Context.Dispose();
 		}
 
 		public Task CreateAsync(BasicSocialUser user)
@@ -58,13 +61,6 @@ namespace BasicSocial.BasicIdentity
 		public Task<BasicSocialUser> FindByNameAsync(string userName)
 		{
 			var model = Context.Users.FirstOrDefault(x => x.UserName == userName);
-
-			//using (var context = new GeneralContext())
-			//{
-			//	var user1 = context.Users.FirstOrDefault(x => x.UserName == userName);
-			//	var user = ToBasicSocialUser(user1);
-			//	return Task.FromResult(user);
-			//}
 			var user = ToBasicSocialUser(model);
 			return Task.FromResult(user);
 		}
@@ -90,6 +86,7 @@ namespace BasicSocial.BasicIdentity
 			return user != null ? new BasicSocialUser(user) : null;
 		}
 
+		#region Not implemented
 
 		public Task<DateTimeOffset> GetLockoutEndDateAsync(BasicSocialUser user)
 		{
@@ -107,13 +104,10 @@ namespace BasicSocial.BasicIdentity
 		}
 
 		public Task ResetAccessFailedCountAsync(BasicSocialUser user) => Task.CompletedTask;
-
 		public Task<int> GetAccessFailedCountAsync(BasicSocialUser user) => Task.FromResult(0);
-
 		public Task<bool> GetLockoutEnabledAsync(BasicSocialUser user) => Task.FromResult(false);
-
-
 		public Task SetLockoutEnabledAsync(BasicSocialUser user, bool enabled) => Task.CompletedTask;
+
 		public Task SetTwoFactorEnabledAsync(BasicSocialUser user, bool enabled)
 		{
 			throw new NotImplementedException();
@@ -123,5 +117,7 @@ namespace BasicSocial.BasicIdentity
 		{
 			return Task.FromResult(false);
 		}
+
+		#endregion
 	}
 }

@@ -29,54 +29,6 @@ namespace BasicSocial.Web.Controllers
 	        _userManager = userManager;
         }
 
-	    //public ApplicationSignInManager SignInManager
-	    //{
-	    //    get
-	    //    {
-	    //        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-	    //    }
-	    //    private set 
-	    //    { 
-	    //        _signInManager = value; 
-	    //    }
-	    //}
-
-	    //public ApplicationUserManager UserManager
-	    //{
-	    //    get
-	    //    {
-	    //        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-	    //    }
-	    //    private set
-	    //    {
-	    //        _userManager = value;
-	    //    }
-	    //}
-
-		//public ApplicationSignInManager SignInManager
-		//{
-		//    get
-		//    {
-		//        return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-		//    }
-		//    private set 
-		//    { 
-		//        _signInManager = value; 
-		//    }
-		//}
-
-		//public ApplicationUserManager UserManager
-		//{
-		//    get
-		//    {
-		//        return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-		//    }
-		//    private set
-		//    {
-		//        _userManager = value;
-		//    }
-		//}
-
 		//
 		// GET: /Account/Login
 		[AllowAnonymous]
@@ -99,11 +51,11 @@ namespace BasicSocial.Web.Controllers
             }
 
 	        _signInManager.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-	        var user = _signInManager.UserManager.FindByName(model.Email);
+	        var user = _signInManager.UserManager.FindByName(model.UserName);
 
 	        if (ModelState.IsValid && !string.IsNullOrWhiteSpace(model.Password) && user != null)
 	        {
-		        var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+		        var signInResult = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
 		        switch (signInResult)
 		        {
@@ -137,11 +89,11 @@ namespace BasicSocial.Web.Controllers
             {
 	            var user = new BasicSocialUser()
 	            {
-					FirstName = "asd",
-					LastName = "dsa",
+					FirstName = model.FirstName,
+					LastName = model.LastName,
+		            Age = model.Age,
 					PasswordHash = model.Password,
-					UserName = model.Email,
-					Age = 17
+					UserName = model.UserName
 	            };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -149,12 +101,6 @@ namespace BasicSocial.Web.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
