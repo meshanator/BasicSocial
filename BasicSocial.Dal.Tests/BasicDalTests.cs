@@ -80,15 +80,15 @@ namespace BasicSocial.Dal.Tests
 		{
 			using (var context = new GeneralContext())
 			{
-				var user1 = context.Users.FirstOrDefault(x => x.Id == 1);
-				var user2 = context.Users.FirstOrDefault(x => x.Id == 2);
+				var user1 = context.Users.FirstOrDefault(x => x.Id == 3);
+				var user2 = context.Users.FirstOrDefault(x => x.Id == 4);
 
 				var p = new ImagePost()
 				{
-					Name = "Today1",
-					Receiver = user1,
-					Sender = user2,
-					Subject = "Saying sup",
+					Name = "Oh hi",
+					Receiver = user2,
+					Sender = user1,
+					Subject = "Saying sup back",
 					Url = "www.google.com/image1"
 				};
 
@@ -124,7 +124,7 @@ namespace BasicSocial.Dal.Tests
 		{
 			using (var context = new GeneralContext())
 			{
-				var user1 = context.Users.FirstOrDefault(x => x.Id == 1);
+				var user1 = context.Users.FirstOrDefault(x => x.Id == 4);
 				var test = user1.ReceivedPosts;
 
 			}

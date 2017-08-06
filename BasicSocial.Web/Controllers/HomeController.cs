@@ -19,9 +19,9 @@ namespace BasicSocial.Web.Controllers
 			if (!Request.IsAuthenticated)
 				return RedirectToAction("login", "account");
 
-			var test = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == test);
-			return View();
+			var userId = User.Identity.GetUserId<int>();
+			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			return View(user);
 		}
 	}
 }

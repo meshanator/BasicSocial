@@ -1,4 +1,15 @@
-﻿@{
+﻿@model BasicSocial.Core.User
+@{
     ViewBag.Title = "Home Page";
 }
 
+<div>@Model.FirstName</div>
+<div>@Model.LastName</div>
+<div>@Model.Age</div>
+
+<div class="ui list">
+    @foreach (var post in Model.ReceivedPosts)
+    {
+        <div class="item">@post.Name</div>
+    }
+</div>
