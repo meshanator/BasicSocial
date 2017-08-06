@@ -33,7 +33,7 @@ namespace BasicSocial.Web
 			        {
 				        TokenLifespan = TimeSpan.FromHours(8)
 			        });
-		        config.For<GeneralContext>().Use<GeneralContext>();//.Singleton();
+		        config.For<GeneralContext>().Use<GeneralContext>().Singleton();
 	        });
 
 	        DependencyResolver.SetResolver(new StructureMapDependencyResolver(container));

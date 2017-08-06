@@ -11,7 +11,7 @@ namespace BasicSocial.Dal
     public class GeneralContext : DbContext
     {
 	    public GeneralContext() : base(
-		    "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BasicSocial.Dal.GeneralContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+		    "DefaultConnection")
 	    {
 
 	    }

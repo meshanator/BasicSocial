@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BasicSocial.BasicIdentity
 {
-	public class BasicSocialUserStore : IUserPasswordStore<BasicSocialUser, int>
+	public class BasicSocialUserStore : IUserPasswordStore<BasicSocialUser, int>, IUserLockoutStore<BasicSocialUser, int>, IUserTwoFactorStore<BasicSocialUser, int>
 	{
 		public GeneralContext Context { get; set; }
 
@@ -57,14 +57,16 @@ namespace BasicSocial.BasicIdentity
 
 		public Task<BasicSocialUser> FindByNameAsync(string userName)
 		{
-			//var model = Context.Users.FirstOrDefault(x => x.UserName == userName);
+			var model = Context.Users.FirstOrDefault(x => x.UserName == userName);
 
-			using (var context = new GeneralContext())
-			{
-				var user1 = context.Users.FirstOrDefault(x => x.UserName == userName);
-				var user = ToBasicSocialUser(user1);
-				return Task.FromResult(user);
-			}
+			//using (var context = new GeneralContext())
+			//{
+			//	var user1 = context.Users.FirstOrDefault(x => x.UserName == userName);
+			//	var user = ToBasicSocialUser(user1);
+			//	return Task.FromResult(user);
+			//}
+			var user = ToBasicSocialUser(model);
+			return Task.FromResult(user);
 		}
 
 		public Task SetPasswordHashAsync(BasicSocialUser user, string passwordHash)
@@ -86,6 +88,40 @@ namespace BasicSocial.BasicIdentity
 		public static BasicSocialUser ToBasicSocialUser(User user)
 		{
 			return user != null ? new BasicSocialUser(user) : null;
+		}
+
+
+		public Task<DateTimeOffset> GetLockoutEndDateAsync(BasicSocialUser user)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task SetLockoutEndDateAsync(BasicSocialUser user, DateTimeOffset lockoutEnd)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<int> IncrementAccessFailedCountAsync(BasicSocialUser user)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task ResetAccessFailedCountAsync(BasicSocialUser user) => Task.CompletedTask;
+
+		public Task<int> GetAccessFailedCountAsync(BasicSocialUser user) => Task.FromResult(0);
+
+		public Task<bool> GetLockoutEnabledAsync(BasicSocialUser user) => Task.FromResult(false);
+
+
+		public Task SetLockoutEnabledAsync(BasicSocialUser user, bool enabled) => Task.CompletedTask;
+		public Task SetTwoFactorEnabledAsync(BasicSocialUser user, bool enabled)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<bool> GetTwoFactorEnabledAsync(BasicSocialUser user)
+		{
+			return Task.FromResult(false);
 		}
 	}
 }
