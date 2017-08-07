@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using BasicSocial.Core;
 using BasicSocial.Dal;
@@ -25,6 +24,30 @@ namespace BasicSocial.Web.Controllers
 			return View(user);
 		}
 
+		public ActionResult FindFriend()
+		{
+			var userId = User.Identity.GetUserId<int>();
+			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			var model = new FindFriendModel
+			{
+				Me = user,
+				Users = Context.Users
+			};
+			return View(model);
+		}
+
+		public ActionResult AddFriend(int theirUserId)
+		{
+			var userId = User.Identity.GetUserId<int>();
+			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+
+			if(!user.Friends.Contains(user2))
+				user.Friends.Add(user2);
+			Context.SaveChanges();
+			return RedirectToAction("FindFriend");
+		}
+
 		[HttpPost]
 		public ActionResult PostFeed(FeedModel model)
 		{
@@ -32,7 +55,7 @@ namespace BasicSocial.Web.Controllers
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
 			//var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
 
-			var textPost = new TextPost()
+			var textPost = new TextPost
 			{
 				Subject = model.Subject,
 				Content = model.Content,
@@ -52,7 +75,7 @@ namespace BasicSocial.Web.Controllers
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
 			var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
 
-			var textPost = new TextPost()
+			var textPost = new TextPost
 			{
 				Subject = model.Subject,
 				Content = model.Content,

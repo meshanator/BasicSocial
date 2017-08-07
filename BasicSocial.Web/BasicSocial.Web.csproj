@@ -197,6 +197,7 @@
     <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\ComposeMessageModel.cs" />
     <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\FindFriendModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -817,6 +818,7 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Home\UserMessages.cshtml" />
     <Content Include="Views\Home\FriendProfile.cshtml" />
+    <Content Include="Views\Home\FindFriend.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

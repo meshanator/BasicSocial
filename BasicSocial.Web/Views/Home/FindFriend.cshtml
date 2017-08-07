@@ -1,0 +1,21 @@
+﻿@model BasicSocial.Web.Models.FindFriendModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <h1>Shunter Social Network</h1>
+    <h2>Finding Friends</h2>
+
+    @foreach (var friend in Model.Users.ToList().Except(Model.Me.Friends))
+    {
+        if (friend.Id == Model.Me.Id)
+        {
+            continue;
+        }
+        <div class="row">
+            <p>@friend.UserName</p>
+            <a href="/home/AddFriend?theirUserId=@friend.Id" class="btn btn-info" role="button">Add</a>
+        </div>
+    }
+</div>
