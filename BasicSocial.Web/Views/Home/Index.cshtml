@@ -13,3 +13,10 @@
         <div class="item">@post.Name</div>
     }
 </div>
+
+<div class="ui list">
+    @foreach (var post in Model.Friends)
+    {
+        <div class="item">@post.UserName</div>
+    }
+</div>

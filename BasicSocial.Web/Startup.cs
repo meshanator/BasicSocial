@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Owin;
 using StructureMap;
@@ -37,8 +38,13 @@ namespace BasicSocial.Web
 	        });
 
 	        DependencyResolver.SetResolver(new StructureMapDependencyResolver(container));
-
-			ConfigureAuth(app);
-        }
+			
+	        app.UseCookieAuthentication(new CookieAuthenticationOptions
+	        {
+		        AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+		        LoginPath = new PathString("/Account/Login"),
+		        Provider = new CookieAuthenticationProvider()
+	        });
+		}
     }
 }

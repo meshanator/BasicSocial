@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BasicSocial.Web.Controllers
 {
+	[Authorize]
 	public class HomeController : Controller
 	{
 		public GeneralContext Context { get; set; }
@@ -16,9 +17,6 @@ namespace BasicSocial.Web.Controllers
 
 		public ActionResult Index()
 		{
-			if (!Request.IsAuthenticated)
-				return RedirectToAction("login", "account");
-
 			var userId = User.Identity.GetUserId<int>();
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
 			return View(user);

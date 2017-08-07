@@ -1,8 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using BasicSocial.BasicIdentity;
@@ -19,27 +15,19 @@ namespace BasicSocial.Web.Controllers
 		private readonly SignInManager<BasicSocialUser, int> _signInManager;
 		private readonly UserManager<BasicSocialUser, int> _userManager;
 
-		public AccountController()
-        {
-        }
-
         public AccountController(SignInManager<BasicSocialUser, int> signInManager, UserManager<BasicSocialUser, int> userManager)
         {
 	        _signInManager = signInManager;
 	        _userManager = userManager;
         }
 
-		//
-		// GET: /Account/Login
 		[AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
+		
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -64,22 +52,16 @@ namespace BasicSocial.Web.Controllers
 			        case SignInStatus.Failure:
 				        break;
 		        }
-
-				//ModelState.AddModelError(string.Empty, Translations.Translations.pleaseEnterUsernameAndPassword);
 			}
 			return View(model);
 		}
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -106,45 +88,9 @@ namespace BasicSocial.Web.Controllers
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
-
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/LogOff
+		
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -152,15 +98,7 @@ namespace BasicSocial.Web.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/ExternalLoginFailure
-        [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
-        {
-            return View();
-        }
-
+		
         protected override void Dispose(bool disposing)
         {
             if (disposing)
