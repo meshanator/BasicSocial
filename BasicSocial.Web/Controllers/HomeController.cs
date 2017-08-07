@@ -21,5 +21,25 @@ namespace BasicSocial.Web.Controllers
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
 			return View(user);
 		}
+
+		public ActionResult Landing()
+		{
+			return View();
+		}
+
+		public ActionResult Login()
+		{
+			return View();
+		}
+
+		public ActionResult Registration()
+		{
+			return View();
+		}
+
+		public ActionResult Messages()
+		{
+			return View();
+		}
 	}
 }

@@ -810,6 +810,10 @@
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.ttf" />
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff" />
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff2" />
+    <Content Include="Views\Home\Landing.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Home\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
