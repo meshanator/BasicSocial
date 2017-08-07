@@ -1,0 +1,39 @@
+﻿@model BasicSocial.Web.Models.ConversationModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <h1>Shunter Social Network</h1>
+    <h2>Viewing Friend</h2>
+    <h2>First Name: @Model.They.FirstName</h2>
+    <h2>Last Name: @Model.They.LastName</h2>
+    <h2>Age: @Model.They.Age</h2>
+
+    @foreach (var post in Model.They.ReceivedPosts)
+    {
+        <div class="row">
+            <p>@post.Name</p>
+            <p>@post.Subject</p>
+        </div>
+    }
+    
+    <h2>Post to their feed</h2>
+    @using (Html.BeginForm("PostToTheirFeed", "Home", FormMethod.Post))
+    {
+        @Html.Hidden("ToUserId", Model.They.Id)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Subject")
+            @Html.TextBox("Subject",string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessage("Subject", "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.Label("Content")
+            @Html.TextBox("Content", string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessage("Content", "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    }
+</div>

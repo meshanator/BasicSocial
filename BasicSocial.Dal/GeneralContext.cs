@@ -12,9 +12,9 @@ namespace BasicSocial.Dal
     {
 	    public GeneralContext() : base(
 		    "DefaultConnection")
-	    {
-
-	    }
+		{
+			//Configuration.LazyLoadingEnabled = false;
+		}
 
 	    public DbSet<User> Users { get; set; }
 		public DbSet<ImagePost> ImagePosts { get; set; } 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using BasicSocial.Core;
 using BasicSocial.Dal;
@@ -24,33 +25,53 @@ namespace BasicSocial.Web.Controllers
 			return View(user);
 		}
 
-		public ActionResult Landing()
-		{
-			return View();
-		}
-
-		public ActionResult Login()
-		{
-			return View();
-		}
-
-		public ActionResult Registration()
-		{
-			return View();
-		}
-
-		public ActionResult Messages()
+		[HttpPost]
+		public ActionResult PostFeed(FeedModel model)
 		{
 			var userId = User.Identity.GetUserId<int>();
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			return View(user);
+			//var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
+
+			var textPost = new TextPost()
+			{
+				Subject = model.Subject,
+				Content = model.Content,
+				Sender = user,
+				Receiver = user
+			};
+
+			Context.TextPosts.Add(textPost);
+			Context.SaveChanges();
+			return RedirectToAction("Index");
 		}
 
-		public ActionResult ComposeMessage()
+		[HttpPost]
+		public ActionResult PostToTheirFeed(FeedModel model)
 		{
 			var userId = User.Identity.GetUserId<int>();
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			return View(user);
+			var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
+
+			var textPost = new TextPost()
+			{
+				Subject = model.Subject,
+				Content = model.Content,
+				Sender = user,
+				Receiver = user2
+			};
+
+			Context.TextPosts.Add(textPost);
+			Context.SaveChanges();
+			return RedirectToAction("FriendProfile", new { theirUserId = user2.Id });
+		}
+
+		public ActionResult FriendProfile(int theirUserId)
+		{
+			var userId = User.Identity.GetUserId<int>();
+			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+			var model = new ConversationModel { Me = user, They = user2 };
+			return View(model);
 		}
 
 		[HttpPost]
@@ -60,7 +81,7 @@ namespace BasicSocial.Web.Controllers
 			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
 			var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
 
-			var privateMessage = new PrivateMessage()
+			var privateMessage = new PrivateMessage
 			{
 				Subject = model.Subject,
 				Content = model.Content,
@@ -70,8 +91,16 @@ namespace BasicSocial.Web.Controllers
 
 			Context.PrivateMessages.Add(privateMessage);
 			Context.SaveChanges();
+			return RedirectToAction("UserMessages", new {theirUserId = user2.Id});
+		}
 
-			return View(user);
+		public ActionResult UserMessages(int theirUserId)
+		{
+			var userId = User.Identity.GetUserId<int>();
+			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+			var model = new ConversationModel {Me = user, They = user2};
+			return View(model);
 		}
 	}
 }

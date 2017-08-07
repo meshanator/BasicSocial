@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using BasicSocial.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -69,9 +70,13 @@ namespace BasicSocial.Dal.Tests
 		{
 			using (var context = new GeneralContext())
 			{
-				var user1 = context.Users.FirstOrDefault(x => x.Id == 3);
+				var user1 = context.Users.FirstOrDefault(x => x.Id == 4);
 				var test = user1.Friends;
 
+				foreach (var user in test)
+				{
+					Trace.WriteLine(user.UserName);
+				}
 			}
 		}
 

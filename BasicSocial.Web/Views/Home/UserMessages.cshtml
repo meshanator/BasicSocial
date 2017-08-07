@@ -1,0 +1,34 @@
+﻿@model BasicSocial.Web.Models.ConversationModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <h1>@Model.Me.UserName Conversation with @Model.They.UserName</h1>
+
+    @foreach (var post in Model.Me.PrivateMessagesSent)
+    {
+        <div class="row">
+            <p>@post.Subject</p>
+            <p>@post.Content</p>
+        </div>
+    }
+    
+    @using (Html.BeginForm("ComposeMessage", "Home", FormMethod.Post))
+    {
+        @Html.Hidden("ToUserId", Model.They.Id)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Subject")
+            @Html.TextBox("Subject",string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessage("Subject", "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.Label("Content")
+            @Html.TextBox("Content", string.Empty, new { @class = "form-control" })
+            @Html.ValidationMessage("Content", "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    }
+</div>
