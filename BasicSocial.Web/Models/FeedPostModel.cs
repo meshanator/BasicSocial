@@ -1,6 +1,6 @@
 ﻿namespace BasicSocial.Web.Models
 {
-	public class FeedModel
+	public class FeedPostModel
 	{
 		public string Subject { get; set; }
 		public string Content { get; set; }

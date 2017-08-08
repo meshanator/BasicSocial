@@ -5,7 +5,7 @@ using System.Web;
 
 namespace BasicSocial.Web.Models
 {
-	public class ComposeMessageModel
+	public class ComposeMessageViewModel
 	{
 		public string Subject { get; set; }
 		public string Content { get; set; }

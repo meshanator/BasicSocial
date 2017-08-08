@@ -90,9 +90,7 @@ namespace BasicSocial.Web.Controllers
 
             return View(model);
         }
-		
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
@@ -101,19 +99,6 @@ namespace BasicSocial.Web.Controllers
 		
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    //_userManager.Dispose();
-                }
-
-                if (_signInManager != null)
-                {
-                    //_signInManager.Dispose();
-                }
-            }
-
             base.Dispose(disposing);
         }
 

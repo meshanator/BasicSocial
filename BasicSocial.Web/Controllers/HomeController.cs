@@ -19,18 +19,18 @@ namespace BasicSocial.Web.Controllers
 
 		public ActionResult Index()
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			return View(user);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			return View(loggedInUser);
 		}
 
-		public ActionResult FindFriend()
+		public ActionResult FindFriends()
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
 			var model = new FindFriendModel
 			{
-				Me = user,
+				Me = loggedInUser,
 				Users = Context.Users
 			};
 			return View(model);
@@ -38,29 +38,28 @@ namespace BasicSocial.Web.Controllers
 
 		public ActionResult AddFriend(int theirUserId)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
 
-			if(!user.Friends.Contains(user2))
-				user.Friends.Add(user2);
+			if(!loggedInUser.Friends.Contains(theirUser))
+				loggedInUser.Friends.Add(theirUser);
 			Context.SaveChanges();
-			return RedirectToAction("FindFriend");
+			return RedirectToAction("FindFriends");
 		}
 
 		[HttpPost]
-		public ActionResult PostFeed(FeedModel model)
+		public ActionResult PostToMyFeed(FeedPostModel postModel)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			//var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
 
 			var textPost = new TextPost
 			{
-				Subject = model.Subject,
-				Content = model.Content,
-				Sender = user,
-				Receiver = user
+				Subject = postModel.Subject,
+				Content = postModel.Content,
+				Sender = loggedInUser,
+				Receiver = loggedInUser
 			};
 
 			Context.TextPosts.Add(textPost);
@@ -69,60 +68,60 @@ namespace BasicSocial.Web.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult PostToTheirFeed(FeedModel model)
+		public ActionResult PostToFriendFeed(FeedPostModel postModel)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == postModel.ToUserId);
 
 			var textPost = new TextPost
 			{
-				Subject = model.Subject,
-				Content = model.Content,
-				Sender = user,
-				Receiver = user2
+				Subject = postModel.Subject,
+				Content = postModel.Content,
+				Sender = loggedInUser,
+				Receiver = theirUser
 			};
 
 			Context.TextPosts.Add(textPost);
 			Context.SaveChanges();
-			return RedirectToAction("FriendProfile", new { theirUserId = user2.Id });
+			return RedirectToAction("FriendFeed", new { theirUserId = theirUser.Id });
 		}
 
-		public ActionResult FriendProfile(int theirUserId)
+		public ActionResult FriendFeed(int theirUserId)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
-			var model = new ConversationModel { Me = user, They = user2 };
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+			var model = new ConversationViewModel { Me = loggedInUser, They = theirUser };
 			return View(model);
 		}
 
 		[HttpPost]
-		public ActionResult ComposeMessage(ComposeMessageModel model)
+		public ActionResult ComposeMessage(ComposeMessageViewModel viewModel)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			var user2 = Context.Users.FirstOrDefault(x => x.Id == model.ToUserId);
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == viewModel.ToUserId);
 
 			var privateMessage = new PrivateMessage
 			{
-				Subject = model.Subject,
-				Content = model.Content,
-				Sender = user,
-				Receiver = user2
+				Subject = viewModel.Subject,
+				Content = viewModel.Content,
+				Sender = loggedInUser,
+				Receiver = theirUser
 			};
 
 			Context.PrivateMessages.Add(privateMessage);
 			Context.SaveChanges();
-			return RedirectToAction("UserMessages", new {theirUserId = user2.Id});
+			return RedirectToAction("Conversation", new {theirUserId = theirUser.Id});
 		}
 
-		public ActionResult UserMessages(int theirUserId)
+		public ActionResult Conversation(int theirUserId)
 		{
-			var userId = User.Identity.GetUserId<int>();
-			var user = Context.Users.FirstOrDefault(x => x.Id == userId);
-			var user2 = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
-			var model = new ConversationModel {Me = user, They = user2};
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+			var model = new ConversationViewModel {Me = loggedInUser, They = theirUser};
 			return View(model);
 		}
 	}

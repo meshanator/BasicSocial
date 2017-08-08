@@ -58,15 +58,15 @@
             {
                 <div class="row">
                     <p>@post.UserName</p>
-                    <a href="home/friendprofile?theiruserid=@post.Id" class="btn btn-info" role="button">Profile</a>
-                    <a href="home/usermessages?theiruserid=@post.Id" class="btn btn-info" role="button">Message</a>
+                    <a href="/home/friendfeed?theiruserid=@post.Id" class="btn btn-info" role="button">Profile</a>
+                    <a href="/home/conversation?theiruserid=@post.Id" class="btn btn-info" role="button">Message</a>
                     <button type="button" class="btn btn-danger">Remove</button>
                 </div>
             }
     
             <br>
             <div class="row">
-                <a href="home/findfriend" class="btn btn-primary" role="button">Find Friends</a>
+                <a href="/home/findfriends" class="btn btn-primary" role="button">Find Friends</a>
             </div>
         </div>
     </div>

@@ -194,9 +194,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConversationModel.cs" />
-    <Compile Include="Models\ComposeMessageModel.cs" />
-    <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\ConversationViewModel.cs" />
+    <Compile Include="Models\ComposeMessageViewModel.cs" />
+    <Compile Include="Models\FeedPostModel.cs" />
     <Compile Include="Models\FindFriendModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -222,6 +222,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -816,9 +817,9 @@
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff" />
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff2" />
     <Content Include="Views\Shared\Backup_Layout.cshtml" />
-    <Content Include="Views\Home\UserMessages.cshtml" />
-    <Content Include="Views\Home\FriendProfile.cshtml" />
-    <Content Include="Views\Home\FindFriend.cshtml" />
+    <Content Include="Views\Home\Conversation.cshtml" />
+    <Content Include="Views\Home\FriendFeed.cshtml" />
+    <Content Include="Views\Home\FindFriends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

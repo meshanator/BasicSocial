@@ -1,4 +1,4 @@
-﻿@model BasicSocial.Web.Models.ConversationModel
+﻿@model BasicSocial.Web.Models.ConversationViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -19,7 +19,7 @@
     }
     
     <h2>Post to their feed</h2>
-    @using (Html.BeginForm("PostToTheirFeed", "Home", FormMethod.Post))
+    @using (Html.BeginForm("PostToFriendFeed", "Home", FormMethod.Post))
     {
         @Html.Hidden("ToUserId", Model.They.Id)
         @Html.AntiForgeryToken()
