@@ -25,6 +25,8 @@ Todo:
 * Add search for friends
 * Better validation
 * Decouple entities from models
+* Add repo layer for data access
+* Add service layer for entry from web app
 
 Screenshots:
 
