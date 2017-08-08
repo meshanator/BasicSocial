@@ -815,7 +815,7 @@
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.ttf" />
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff" />
     <Content Include="semantic\dist\themes\material\assets\fonts\icons.woff2" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\Backup_Layout.cshtml" />
     <Content Include="Views\Home\UserMessages.cshtml" />
     <Content Include="Views\Home\FriendProfile.cshtml" />
     <Content Include="Views\Home\FindFriend.cshtml" />

@@ -4,55 +4,70 @@
 }
 
 <div class="container">
-    <h1>Shunter Social Network</h1>
+    
+    <h1>HSN</h1>
     <h2>First Name: @Model.FirstName</h2>
     <h2>Last Name: @Model.LastName</h2>
     <h2>Age: @Model.Age</h2>
-
-    @foreach (var post in Model.ReceivedPosts)
-    {
-        <div class="row">
-            <p>@post.Name</p>
-            <p>@post.Subject</p>
-        </div>
-    }
     
+    <div class="panel panel-primary">
+        <div class="panel-heading">My Feed</div>
+        <div class="panel-body">
+            
+            @foreach (var post in Model.ReceivedPosts)
+            {
+                <div class="row">
+                    <p>@post.Name</p>
+                    <p>@post.Subject</p>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">Post to my feed</div>
+        <div class="panel-body">
+            @using (Html.BeginForm("PostFeed", "Home", FormMethod.Post))
+            {
+                @Html.Hidden("ToUserId", Model.Id)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="form-group">
+                    @Html.Label("Subject")
+                    @Html.TextBox("Subject", string.Empty, new {@class = "form-control"})
+                    @Html.ValidationMessage("Subject", "", new {@class = "text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.Label("Content")
+                    @Html.TextBox("Content", string.Empty, new {@class = "form-control"})
+                    @Html.ValidationMessage("Content", "", new {@class = "text-danger"})
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            }
 
-    <h2>Post to my feed</h2>
-    @using (Html.BeginForm("PostFeed", "Home", FormMethod.Post))
-    {
-        @Html.Hidden("ToUserId", Model.Id)
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("Subject")
-            @Html.TextBox("Subject",string.Empty, new { @class = "form-control" })
-            @Html.ValidationMessage("Subject", "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            @Html.Label("Content")
-            @Html.TextBox("Content", string.Empty, new { @class = "form-control" })
-            @Html.ValidationMessage("Content", "", new { @class = "text-danger" })
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    }
+    </div>
 </div>
 
 <div class="container">
-    <h2>Friends</h2>
+    <div class="panel panel-info">
+        <div class="panel-heading">Friends</div>
+        <div class="panel-body">
+            
+            @foreach (var post in Model.Friends)
+            {
+                <div class="row">
+                    <p>@post.UserName</p>
+                    <a href="home/friendprofile?theiruserid=@post.Id" class="btn btn-info" role="button">Profile</a>
+                    <a href="home/usermessages?theiruserid=@post.Id" class="btn btn-info" role="button">Message</a>
+                    <button type="button" class="btn btn-danger">Remove</button>
+                </div>
+            }
     
-        @foreach (var post in Model.Friends)
-        {
+            <br>
             <div class="row">
-                <p>@post.UserName</p>
-                <a href="home/friendprofile?theiruserid=@post.Id" class="btn btn-info" role="button">Profile</a>
-                <a href="home/usermessages?theiruserid=@post.Id" class="btn btn-info" role="button">Message</a>
-                <button type="button" class="btn btn-danger">Remove</button>
+                <a href="home/findfriend" class="btn btn-primary" role="button">Find Friends</a>
             </div>
-        }
-    
-    <br>
-    <div class="row">
-        <a href="home/findfriend" class="btn btn-primary" role="button">Find Friends</a>
+        </div>
     </div>
 </div>
