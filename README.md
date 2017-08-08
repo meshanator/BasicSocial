@@ -25,3 +25,23 @@ Todo:
 * Add search for friends
 * Better validation
 * Decouple entities from models
+
+Screenshots:
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/1.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/2.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/3.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/4.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/5.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/6.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/7.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/8.png" width="500">
+
+<img src="https://raw.githubusercontent.com/meshanator/BasicSocial/master/BasicSocial.Web/previewimages/9.png" width="500">
