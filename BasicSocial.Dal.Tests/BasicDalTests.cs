@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using BasicSocial.Core;
@@ -11,15 +10,15 @@ namespace BasicSocial.Dal.Tests
 	public class BasicDalTests
 	{
 		[TestMethod]
-		public void TestMethod1()
+		public void TestSeed1()
 		{
 			using (var temp = new GeneralContext())
 			{
 				var user = new User()
 				{
 					Age = 28,
-					FirstName = "Meshan",
-					LastName = "Naidoo",
+					FirstName = "Harry",
+					LastName = "Person",
 					Friends = new List<User>(),
 					SentPosts = new List<Post>(),
 					ReceivedPosts = new List<Post>(),
@@ -31,7 +30,7 @@ namespace BasicSocial.Dal.Tests
 				{
 					Age = 28,
 					FirstName = "Steven",
-					LastName = "Wagner",
+					LastName = "Lister",
 					Friends = new List<User>()
 					{
 						user
@@ -45,8 +44,8 @@ namespace BasicSocial.Dal.Tests
 				var user3 = new User()
 				{
 					Age = 28,
-					FirstName = "James",
-					LastName = "Turner",
+					FirstName = "Jane",
+					LastName = "Bottle",
 					Friends = new List<User>()
 					{
 						user,
@@ -66,7 +65,7 @@ namespace BasicSocial.Dal.Tests
 		}
 
 		[TestMethod]
-		public void TestUser3Friends()
+		public void TestUserFriends1()
 		{
 			using (var context = new GeneralContext())
 			{
@@ -81,7 +80,7 @@ namespace BasicSocial.Dal.Tests
 		}
 
 		[TestMethod]
-		public void TestPosts()
+		public void TestPosts1()
 		{
 			using (var context = new GeneralContext())
 			{
@@ -90,10 +89,10 @@ namespace BasicSocial.Dal.Tests
 
 				var p = new ImagePost()
 				{
-					Name = "Oh hi",
+					Name = "Name 1",
 					Receiver = user2,
 					Sender = user1,
-					Subject = "Saying sup back",
+					Subject = "Saying Hi",
 					Url = "www.google.com/image1"
 				};
 
@@ -112,11 +111,11 @@ namespace BasicSocial.Dal.Tests
 
 				var p = new TextPost()
 				{
-					Name = "Today1",
+					Name = "Name 1",
 					Receiver = user1,
 					Sender = user2,
-					Subject = "Saying sup",
-					Content = "post bro"
+					Subject = "Saying Hi 1",
+					Content = "Content 1"
 				};
 
 				context.TextPosts.Add(p);
@@ -125,29 +124,26 @@ namespace BasicSocial.Dal.Tests
 		}
 
 		[TestMethod]
-		public void TestUserPosts()
+		public void TestUserPosts1()
 		{
 			using (var context = new GeneralContext())
 			{
 				var user1 = context.Users.FirstOrDefault(x => x.Id == 4);
 				var test = user1.ReceivedPosts;
-
 			}
 		}
 
-
 		[TestMethod]
-		public void TestGetPosts()
+		public void TestGetPosts1()
 		{
 			using (var context = new GeneralContext())
 			{
 				var user1 = context.ImagePosts.FirstOrDefault(x => x.Id == 2);
-
 			}
 		}
 
 		[TestMethod]
-		public void TestUserCreateMessage()
+		public void TestUserCreateMessage1()
 		{
 			using (var context = new GeneralContext())
 			{
@@ -156,7 +152,7 @@ namespace BasicSocial.Dal.Tests
 
 				var message = new PrivateMessage()
 				{
-					Content = "hello brother",
+					Content = "Content 1",
 					Sender = user1,
 					Receiver = user2
 				};
@@ -167,16 +163,13 @@ namespace BasicSocial.Dal.Tests
 		}
 
 		[TestMethod]
-		public void TestUser1Messages()
+		public void TestUserMessages1()
 		{
 			using (var context = new GeneralContext())
 			{
 				var user1 = context.Users.FirstOrDefault(x => x.Id == 1);
 				var test = user1.PrivateMessagesSent;
-
 			}
 		}
-
-
 	}
 }

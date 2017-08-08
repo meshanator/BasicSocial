@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using BasicSocial.Core;
 
 namespace BasicSocial.Dal
@@ -13,7 +8,6 @@ namespace BasicSocial.Dal
 	    public GeneralContext() : base(
 		    "DefaultConnection")
 		{
-			//Configuration.LazyLoadingEnabled = false;
 		}
 
 	    public DbSet<User> Users { get; set; }
@@ -23,6 +17,7 @@ namespace BasicSocial.Dal
 
 	    protected override void OnModelCreating(DbModelBuilder modelBuilder)
 	    {
+			//setting up relationships
 			//user
 		    modelBuilder.Entity<User>()
 			    .HasMany(s => s.Friends)

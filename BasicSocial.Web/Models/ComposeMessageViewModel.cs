@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BasicSocial.Web.Models
+﻿namespace BasicSocial.Web.Models
 {
 	public class ComposeMessageViewModel
 	{

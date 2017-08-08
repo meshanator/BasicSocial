@@ -1,25 +1,21 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <title>Hacker Boards</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" type="image/ico" href="http://www.iconarchive.com/download/i94272/bokehlicia/captiva/accessories-camera.ico" />
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap.min.css">
     <script src="/Scripts/bootstrap.min.js"></script>
     <script src="/Scripts/jquery.min.js"></script>
 
     <style>
-        @@media (min-width: 1200px) {
-            .container {
-                max-width: 500px;
-            }
-        }
-
-        /*h1, h2 {
-            color: #00FF00;
-        }*/
+        /*to override bootstrap*/
+         @@media (min-width: 1200px) {
+             .container {
+                 max-width: 500px;
+             }
+         }
     </style>
 </head>
 
@@ -31,8 +27,6 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-            @*<li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>*@
         </ul>
         @Html.Partial("_LoginPartial")
     </div>
@@ -40,6 +34,4 @@
 @RenderBody()
 </body>
 </html>
-
-
 @RenderSection("scripts", required: false)
