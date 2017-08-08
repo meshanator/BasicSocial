@@ -27,24 +27,14 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">HSN</a>
+            <a class="navbar-brand" href="/">Hacker Boards</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
+            @*<li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>*@
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            @if (Request.IsAuthenticated)
-            {
-                <li><a href="/Account/LogOff"><span class="glyphicon glyphicon-user"></span> Log off</a></li>}
-            else
-            {
-                <li><a href="/Account/Register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-                <li><a href="/Account/Login"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-            }
-
-        </ul>
+        @Html.Partial("_LoginPartial")
     </div>
 </nav>
 @RenderBody()

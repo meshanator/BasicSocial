@@ -1,29 +1,66 @@
-﻿@model BasicSocial.Core.User
+﻿@using BasicSocial.Core
+@model User
 @{
-    ViewBag.Title = "Home Page";
 }
-
 <div class="container">
     
-    <h1>HSN</h1>
-    <h2>First Name: @Model.FirstName</h2>
-    <h2>Last Name: @Model.LastName</h2>
-    <h2>Age: @Model.Age</h2>
-    
+    <div class="panel panel-primary">
+        <div class="panel-heading">My Details</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h4><b>User Name</b> : @Model.UserName</h4>
+                </div>
+                <div class="col-sm-10">
+                    <h4><b>First Name</b> : @Model.FirstName</h4>
+                </div>
+                <div class="col-sm-10">
+                    <h4><b>Last Name</b> : @Model.LastName</h4>
+                </div>
+                <div class="col-sm-10">
+                    <h4><b>Age</b> : @Model.Age</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel panel-primary">
         <div class="panel-heading">My Feed</div>
         <div class="panel-body">
             
-            @foreach (var post in Model.ReceivedPosts)
+            @if (Model.ReceivedPosts.Any())
+            {
+                foreach (var post in Model.ReceivedPosts.OrderByDescending(x => x.Id))
+                {
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h4><b>From</b>: @post.Sender.UserName</h4>
+                            <p><b>Subject</b>: @post.Subject</p>
+                            
+                            @if (post is TextPost)
+                            {
+                                <p><b>Content</b>: @(((TextPost)post).Content)</p>
+                            }
+                            else
+                            {
+                                <p><img src="@(((ImagePost)post).Url)"/></p>
+                            }
+                        </div>
+                    </div>
+                    <hr />}
+            }
+            else
             {
                 <div class="row">
-                    <p>@post.Name</p>
-                    <p>@post.Subject</p>
+                <div class="col-sm-10">
+                <h4>Empty Feed</h4>
+                </div>
                 </div>
             }
+
         </div>
     </div>
-    
+
     <div class="panel panel-primary">
         <div class="panel-heading">Post to my feed</div>
         <div class="panel-body">
@@ -39,7 +76,7 @@
                 </div>
                 <div class="form-group">
                     @Html.Label("ImagePost")
-                    @Html.CheckBox("ImagePost", new { id = "imagePost" })
+                    @Html.CheckBox("ImagePost", new {id = "imagePost"})
                 </div>
                 <div class="form-group" id="contentGroup">
                     @Html.Label("Content")
@@ -48,7 +85,7 @@
                 </div>
                 <div class="form-group" id="urlGroup" style="display: none;">
                     @Html.Label("Url")
-                    @Html.TextBox("Url", string.Empty, new { @class = "form-control", id = "urlText" })
+                    @Html.TextBox("Url", string.Empty, new {@class = "form-control", id = "urlText"})
                 </div>
 
                 <button type="submit" class="btn btn-default">Submit</button>
@@ -63,19 +100,24 @@
         <div class="panel-heading">Friends</div>
         <div class="panel-body">
             
-            @foreach (var post in Model.Friends)
+            @foreach (var friend in Model.Friends)
             {
                 <div class="row">
-                    <p>@post.UserName</p>
-                    <a href="/home/friendfeed?theiruserid=@post.Id" class="btn btn-info" role="button">Profile</a>
-                    <a href="/home/conversation?theiruserid=@post.Id" class="btn btn-info" role="button">Message</a>
-                    <button type="button" class="btn btn-danger">Remove</button>
+                    <div class="col-sm-10">
+                        <h4><b>User Name</b> : @friend.UserName</h4>
+                        <a href="/home/friendfeed?theiruserid=@friend.Id" class="btn btn-info" role="button">Profile</a>
+                        <a href="/home/conversation?theiruserid=@friend.Id" class="btn btn-info" role="button">Message</a>
+                        <a href="/home/removefriend?theiruserid=@friend.Id" class="btn btn-danger" role="button">Remove</a>
+                    </div>
                 </div>
+                <hr/>
             }
     
             <br>
             <div class="row">
-                <a href="/home/findfriends" class="btn btn-primary" role="button">Find Friends</a>
+                <div class="col-sm-10">
+                    <a href="/home/findfriends" class="btn btn-primary" role="button">Find Friends</a>
+                </div>
             </div>
         </div>
     </div>

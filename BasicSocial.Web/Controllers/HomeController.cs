@@ -48,6 +48,18 @@ namespace BasicSocial.Web.Controllers
 			return RedirectToAction("FindFriends");
 		}
 
+		public ActionResult RemoveFriend(int theirUserId)
+		{
+			var loggedInUserId = User.Identity.GetUserId<int>();
+			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
+			var theirUser = Context.Users.FirstOrDefault(x => x.Id == theirUserId);
+
+			if (loggedInUser.Friends.Contains(theirUser))
+				loggedInUser.Friends.Remove(theirUser);
+			Context.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
 		[HttpPost]
 		public ActionResult PostToMyFeed(FeedPostModel postModel)
 		{

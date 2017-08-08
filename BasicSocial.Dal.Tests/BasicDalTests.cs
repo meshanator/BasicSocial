@@ -135,6 +135,17 @@ namespace BasicSocial.Dal.Tests
 			}
 		}
 
+
+		[TestMethod]
+		public void TestGetPosts()
+		{
+			using (var context = new GeneralContext())
+			{
+				var user1 = context.ImagePosts.FirstOrDefault(x => x.Id == 2);
+
+			}
+		}
+
 		[TestMethod]
 		public void TestUserCreateMessage()
 		{

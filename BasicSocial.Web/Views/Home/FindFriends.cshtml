@@ -1,21 +1,37 @@
 ﻿@model BasicSocial.Web.Models.FindFriendModel
 @{
-    ViewBag.Title = "Home Page";
 }
 
 <div class="container">
-    <h1>Shunter Social Network</h1>
-    <h2>Finding Friends</h2>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Finding Friends</div>
+        <div class="panel-body">
 
-    @foreach (var friend in Model.Users.ToList().Except(Model.Me.Friends))
-    {
-        if (friend.Id == Model.Me.Id)
-        {
-            continue;
-        }
-        <div class="row">
-            <p>@friend.UserName</p>
-            <a href="/home/AddFriend?theirUserId=@friend.Id" class="btn btn-info" role="button">Add</a>
+            @if (Model.Users.ToList().Except(Model.Me.Friends).Any())
+            {
+                foreach (var friend in Model.Users.ToList().Except(Model.Me.Friends))
+                {
+                    if (friend.Id == Model.Me.Id)
+                    {
+                        continue;
+                    }
+
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h4><b>User Name</b> : @friend.UserName</h4>
+                            <a href="/home/AddFriend?theirUserId=@friend.Id" class="btn btn-info" role="button">Add</a>
+                        </div>
+                    </div>
+                    <hr />}
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h4><b>No friends to add</b></h4>
+                    </div>
+                </div>
+                <hr />}
         </div>
-    }
+    </div>
 </div>
