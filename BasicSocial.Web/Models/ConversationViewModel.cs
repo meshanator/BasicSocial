@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using BasicSocial.Core;
+﻿using BasicSocial.Core;
 
 namespace BasicSocial.Web.Models
 {

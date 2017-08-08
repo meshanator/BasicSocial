@@ -54,16 +54,33 @@ namespace BasicSocial.Web.Controllers
 			var loggedInUserId = User.Identity.GetUserId<int>();
 			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
 
-			var textPost = new TextPost
+			if (postModel.ImagePost)
 			{
-				Subject = postModel.Subject,
-				Content = postModel.Content,
-				Sender = loggedInUser,
-				Receiver = loggedInUser
-			};
+				var post = new ImagePost
+				{
+					Subject = postModel.Subject,
+					Url = postModel.Url,
+					Sender = loggedInUser,
+					Receiver = loggedInUser
+				};
 
-			Context.TextPosts.Add(textPost);
-			Context.SaveChanges();
+				Context.ImagePosts.Add(post);
+				Context.SaveChanges();
+			}
+			else
+			{
+				var post = new TextPost
+				{
+					Subject = postModel.Subject,
+					Content = postModel.Content,
+					Sender = loggedInUser,
+					Receiver = loggedInUser
+				};
+
+				Context.TextPosts.Add(post);
+				Context.SaveChanges();
+			}
+
 			return RedirectToAction("Index");
 		}
 
@@ -74,16 +91,33 @@ namespace BasicSocial.Web.Controllers
 			var loggedInUser = Context.Users.FirstOrDefault(x => x.Id == loggedInUserId);
 			var theirUser = Context.Users.FirstOrDefault(x => x.Id == postModel.ToUserId);
 
-			var textPost = new TextPost
+			if (postModel.ImagePost)
 			{
-				Subject = postModel.Subject,
-				Content = postModel.Content,
-				Sender = loggedInUser,
-				Receiver = theirUser
-			};
+				var post = new ImagePost
+				{
+					Subject = postModel.Subject,
+					Url = postModel.Url,
+					Sender = loggedInUser,
+					Receiver = theirUser
+				};
 
-			Context.TextPosts.Add(textPost);
-			Context.SaveChanges();
+				Context.ImagePosts.Add(post);
+				Context.SaveChanges();
+			}
+			else
+			{
+				var post = new TextPost
+				{
+					Subject = postModel.Subject,
+					Content = postModel.Content,
+					Sender = loggedInUser,
+					Receiver = theirUser
+				};
+
+				Context.TextPosts.Add(post);
+				Context.SaveChanges();
+			}
+
 			return RedirectToAction("FriendFeed", new { theirUserId = theirUser.Id });
 		}
 
