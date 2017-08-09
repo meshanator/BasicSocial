@@ -27,6 +27,7 @@ Todo:
 * Decouple entities from models
 * Add repo layer for data access
 * Add service layer for entry from web app
+* Transition calls on pages to ajax calls for silent postbacks
 
 Screenshots:
 
